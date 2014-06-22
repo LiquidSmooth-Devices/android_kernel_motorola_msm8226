@@ -1896,6 +1896,7 @@ int update_preset_lcdc_lut_s2d(int lut_trigger)
 			g_kcal_r = 255;
 			g_kcal_g = 255;
 			g_kcal_b = 255;
+			mdss_mdp_pp_argc_kcal(g_kcal_r,g_kcal_g,g_kcal_b);
 			flag = 1;
 		}
 	}
@@ -1922,9 +1923,6 @@ int update_preset_lcdc_lut_s2d(int lut_trigger)
 
 	if (flag == 0)
 		mdss_mdp_pp_argc_kcal(g_kcal_r,g_kcal_g,g_kcal_b);
-
-	if (flag == 1)
-		flag = 0;
 
 	if (ret)
 		pr_err("%s: failed to set lut! %d\n", __func__, ret);
