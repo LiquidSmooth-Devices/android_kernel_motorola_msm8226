@@ -1,0 +1,6 @@
+# Deathly Extras
+
+service deathly-sh /system/bin/sh /init.deathly.sh
+	class late_start
+	user root
+	oneshot
