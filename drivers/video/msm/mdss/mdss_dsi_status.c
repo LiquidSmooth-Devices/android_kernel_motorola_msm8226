@@ -107,6 +107,15 @@ static void check_dsi_ctrl_status(struct work_struct *work)
 		return;
 	}
 
+	if (pdsi_status->mfd->shutdown_pending) {
+		mutex_unlock(&mdp5_data->ov_lock);
+		if (ctl->shared_lock)
+			mutex_unlock(ctl->shared_lock);
+		pr_err("%s: DSI turning off, avoiding BTA status check\n",
+							__func__);
+		return;
+	}
+
 	/*
 	 * For the command mode panels, we return pan display
 	 * IOCTL on vsync interrupt. So, after vsync interrupt comes
